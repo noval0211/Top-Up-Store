@@ -11,6 +11,10 @@ export default function AdminLayout() {
                     </li>
 
                     <li className="px-3 py-2 hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-all ease-in-out duration-150 cursor-pointer">
+                        <a className="border-l-2 border-[var(--light-color)] pl-2">Banner Ads / Promo</a>
+                    </li>
+
+                    <li className="px-3 py-2 hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-all ease-in-out duration-150 cursor-pointer">
                         <a className="border-l-2 border-[var(--light-color)] pl-2">Referral Code</a>
                     </li>
 
