@@ -10,9 +10,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
+model userAccounts {
   id Int @id @default(autoincrement())
   name String
   email String @unique
   password String 
+  role String @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+} 
+
+model product {
+  id Int @id @default(autoincrement())
+  name String
+  description String?
+  price Float
+  image Bytes?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model banner {
+  id Int @id @default(autoincrement())
+  image Bytes?
+  createdAt DateTime @default(now())
 }

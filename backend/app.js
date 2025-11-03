@@ -1,21 +1,28 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import { PORT } from './config/env.js';
 
-import { PORT } from './config/env.js'
+import authRouter from "./routes/authRoutes.js";
+import productRouter from "./routes/productRoutes.js";
+import bannerRouter from "./routes/bannerRoutes.js";
 
-import authRouter from "./routes/auth.js";
-import userRouter from "./models/user.model.js";
+const app = express();
 
-const app = express()
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 
-app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
-app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/user', userRouter)
+app.use('/auth', authRouter);
+app.use('/product', productRouter);
+app.use('/banner', bannerRouter);
 
 app.listen(PORT, () => {
-  console.log(`Api is running in port ${PORT}`)
+  console.log(`Api is running in port ${PORT}`);
 })
 
-export default app
+export default app;
