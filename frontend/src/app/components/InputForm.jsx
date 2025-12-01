@@ -32,7 +32,7 @@ export default function InputForm({position, rounded, labelW, label, id, name, t
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
-                className={`w-full px-3 py-0.5 outline-2 outline-[var(--light-color)] rounded-tr-${roundedStyle}`}
+                className={`w-full px-3 py-1 outline-2 outline-[var(--light-color)] rounded-tr-${roundedStyle}`}
                 required />
         </div>
     )

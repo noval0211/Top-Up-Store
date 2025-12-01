@@ -21,8 +21,9 @@ app.use('/auth', authRouter);
 app.use('/product', productRouter);
 app.use('/banner', bannerRouter);
 
-app.listen(PORT, () => {
-  console.log(`Api is running in port ${PORT}`);
+app.listen(2000, () => {
+
+  console.log(`Api is running in port 2000`);
 })
 
 export default app;

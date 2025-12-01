@@ -1,6 +1,6 @@
 
 import { Router } from "express";
-import { CreateProduct, Product } from "../controllers/productController.js";
+import { CreateProduct, Product, GetProductById } from "../controllers/productController.js";
 import multer from "multer";
 
 const productRouter = Router();
@@ -12,5 +12,6 @@ const upload = multer({
 
 productRouter.post("/add", upload.single("image") ,CreateProduct)
 productRouter.get("/get", Product)
+productRouter.get("/get/:id", GetProductById)
 
 export default productRouter
