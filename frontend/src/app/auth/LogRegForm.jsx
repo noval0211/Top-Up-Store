@@ -32,7 +32,7 @@ export default function Login({ onClose, setUser }) {
 
         if (!email || !password) return;
         try {
-            const res = await fetch("http://localhost:5000/auth/login", {
+            const res = await fetch("http://localhost:2000/auth/login", {
                 method: "POST",
                 credentials: "include",
                 headers: { "content-type": "application/json" },
@@ -59,7 +59,7 @@ export default function Login({ onClose, setUser }) {
         if (!username || !email || !password) return;
 
         try {
-            const res = await fetch("http://localhost:5000/auth/register", {
+            const res = await fetch("http://localhost:2000/auth/register", {
                 method: "POST",
                 credentials: "include",
                 headers: { "content-type": "application/json" },

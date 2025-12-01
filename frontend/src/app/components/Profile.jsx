@@ -2,7 +2,7 @@
 export default function Profile({ setLogout }) {
 
     const handleLogout = async (e) => {
-        await fetch("http://localhost:5000/auth/logout", {
+        await fetch("http://localhost:2000/auth/logout", {
             method: "POST",
             credentials: "include",
         });

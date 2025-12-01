@@ -26,7 +26,7 @@ export default function Products() {
             formData.append("name", productName)
             formData.append("type", productType)
 
-            const res = await fetch("http://localhost:5000/product/add", {
+            const res = await fetch("http://localhost:2000/product/add", {
                 method: "POST",
                 credentials: "include",
                 body: formData,

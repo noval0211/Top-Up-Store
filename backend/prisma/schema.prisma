@@ -23,8 +23,7 @@ model userAccounts {
 model product {
   id Int @id @default(autoincrement())
   name String
-  description String?
-  price Float
+  type String?
   image Bytes?
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt

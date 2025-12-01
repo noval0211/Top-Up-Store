@@ -22,7 +22,7 @@ export default function BannerPromo() {
 
             formData.append('image', bannerImage);
 
-            const response = await fetch("http://localhost:5000/banner/add", {
+            const response = await fetch("http://localhost:2000/banner/add", {
                 method: "POST",
                 credentials: "include",
                 body: formData,

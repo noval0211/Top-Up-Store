@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 const prisma = new PrismaClient();
 
 export const Register = async (req, res) => {
+
     const { name, email, password } = req.body;
     try {
         const exist = await prisma.userAccounts.findUnique({ where: { email } });

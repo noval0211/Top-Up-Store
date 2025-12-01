@@ -12,7 +12,7 @@ export const addBanner = async (req, res) => {
 
         res.status(201).json({ message: "Success Add", banner })
     } catch (err) {
-        res.status(400).json({ message: "Error Adding Banner", error: err.message })
+        res.status(500).json({ message: "Error Adding Banner", error: err.message })
     };
 }
 
@@ -20,7 +20,7 @@ export const removeBanner = async (req, res) => {
     try {
 
     } catch (err) {
-        res.status(400).json({ message: "Failed to Remove Banner", error: err.message })
+        res.status(500).json({ message: "Failed to Remove Banner", error: err.message })
     }
 }
 
@@ -34,6 +34,6 @@ export const showBanner = async (req, res) => {
     res.status(200).json(dataWithBase64);
 
     } catch (err) {
-        res.status(400).json({ message: "Error Showing Banner", error: err.message })
+        res.status(500).json({ message: "Error Showing Banner", error: err.message })
     }
 }
