@@ -2,7 +2,7 @@
 
 export default function Footer() {
     return (
-        <footer className="w-full h-fit flex flex-col gap-2 items-center justify-center bg-[var(--foreground)] ">
+        <footer className="w-full h-fit flex flex-col gap-2 items-center justify-center bg-[var(--foreground)] text-white">
             <div className="flex p-10 gap-20">
                 <div className="w-[50%] h-fit flex flex-col gap-5 text-sm">
                     <h2 className="text-center text-lg font-bold border-b-2 pb-2 ">About Store</h2>

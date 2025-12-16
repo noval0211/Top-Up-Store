@@ -1,8 +1,7 @@
 
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { getFilterProductById } from "../api/productApi";
+import { getFilterProductById } from "../../lib/api/productApi";
 import slug from "slug";
 
 export default function ProductCard({ filter }) {
@@ -27,18 +26,25 @@ export default function ProductCard({ filter }) {
         fetchData()
     }, [filter]);
 
+    if(products.length == 0) {
+        return(
+            <div className="opacity-70">
+                No Products
+            </div>
+        )
+    }
 
     return (
-        <div className="w-fit h-full max-h-fit gap-5 list-none text-sm
+        <div className="w-fit h-full max-h-fit gap-7 list-none text-sm
         grid grid-cols-2 
         sm:grid-cols-3 
         md:grid-cols-4
         lg:grid-cols-5 
-        xl:grid-cols-7">
+        xl:grid-cols-6">
             {products.map((p) => (
-                <Link
+                <a
                     key={p.id}
-                    href={`/product/${slug(p.name)}-${p.id}`} prefetch={true}
+                    href={`/product/${slug(p.name)}-${p.id}`}
                     className=" relative w-35 h-50 xl:w-40 xl:h-55 group hover:scale-110 origin-center rounded-xl cursor-pointer
                             ease-in duration-100 transition-all
                             outline-2 outline-[var(--light-color)]">
@@ -50,15 +56,15 @@ export default function ProductCard({ filter }) {
                         className="relative w-full h-full rounded-xl object-cover" />
 
                     <div className="absolute bottom-0 bg-transparent backdrop-blur-md 
-                                w-full h-15 outline-2 outline-[var(--light-color)] 
+                                w-full h-14 outline-2 outline-[var(--light-color)] 
                                 flex items-center justify-center 
                                 group-hover:h-0 group-hover:outline-none 
                                 ease-in-out duration-100 transition-all 
                                 rounded-xl overflow-hidden">
-                        <span className="text-wrap text-center px-2 leading-tight">{p.name}</span>
+                        <span className="text-wrap text-center px-2 leading-tight font-semibold">{p.name}</span>
                     </div>
 
-                </Link>
+                </a>
             ))}
         </div>
     )
