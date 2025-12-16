@@ -1,13 +1,11 @@
+import GoogleSignOut from "../auth/Firebase/auth_google_provider_signout";
 
-export default function Profile({ setLogout }) {
+export default function Profile() {
 
-    const handleLogout = async (e) => {
-        await fetch("http://localhost:2000/auth/logout", {
-            method: "POST",
-            credentials: "include",
-        });
-        setLogout(null); // hapus state user
+    const handleLogout = async () => {
+        await GoogleSignOut()
     }
+    
     return (
         <div className="relative w-full h-[250px] bg-[var(--background)] flex flex-col items-center rounded-b-2xl">
             <div

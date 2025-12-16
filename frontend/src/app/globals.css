@@ -1,26 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Notch:wght@200..700&display=swap');
 @import "tailwindcss";
 
 :root {
+  --light-color: #FAF0E6;
   --background: #222831;
   --foreground: #393E46;
-  --light-color: #FAF8F1;
+}
+
+.dark {
+  --light-color: #222831;
+  --foreground: #393E46;
+  --background: #FAF0E6;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: "Momo Trust Display", sans-serif;
+  font-family: "Stack Sans Notch", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   overflow: auto;
-
+  background-color: var(--background);
 }
 
 body::-webkit-scrollbar {
   display: none;
 }
-
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
