@@ -9,7 +9,7 @@ import bannerRouter from "./routes/banner.routes.js";
 const app = express();
 
 app.use(cors({
-  origin: ["http://localhost:3000", "http://192.168.1.15:3000"],
+  origin: process.env.CORS_ORIGIN?.split(','),
   credentials: true
 }));
 
@@ -20,8 +20,10 @@ app.use('/auth', authRouter);
 app.use('/product', productRouter);
 app.use('/banner', bannerRouter);
 
-app.listen(2000, "0.0.0.0", () => {
-  console.log(`Api is running in port 2000`);
+const port = process.env.PORT
+
+app.listen(port, () => {
+  console.log(`Api is running in port ${port}`);
 })
 
 export default app;
