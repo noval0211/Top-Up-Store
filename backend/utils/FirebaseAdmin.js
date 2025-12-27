@@ -1,7 +1,7 @@
 import admin from "firebase-admin";
 import 'dotenv/config';
 
-if (!FIREBASE_PRIVATE_KEY) {
+if (!process.env.PRIVATE_KEY) {
   throw new Error("FIREBASE_PRIVATE_KEY is missing")
 }
 
