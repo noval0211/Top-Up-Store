@@ -1,6 +1,6 @@
 
 export async function GetBanner() {
-    const res = await fetch("http://localhost:2000/banner/get", {
+    const res = await fetch("https://top-up-store-production.up.railway.app/get", {
         method: "GET",
         credentials: 'include',
         cache: 'no-cache'

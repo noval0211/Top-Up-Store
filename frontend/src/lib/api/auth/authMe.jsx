@@ -17,7 +17,7 @@ export function AuthMe() {
 
       const token = await user.getIdToken();
 
-      const res = await fetch("http://localhost:2000/auth/me", {
+      const res = await fetch("https://top-up-store-production.up.railway.app/auth/me", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,

@@ -2,7 +2,7 @@ export async function GoogleAuth(token) {
     try {
         if (!token) return { ok: false, message: "No token provided" }
 
-        const res = await fetch("http://localhost:2000/auth/firebase", {
+        const res = await fetch("https://top-up-store-production.up.railway.app/auth/firebase", {
             method: "POST",
             credentials: "include",
             headers: {

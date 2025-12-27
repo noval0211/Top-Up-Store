@@ -1,6 +1,6 @@
 
 export async function DeleteProductById(id) {
-    const res = await fetch(`http://localhost:2000/product/delete/${id}`, {
+    const res = await fetch(`https://top-up-store-production.up.railway.app/product/delete/${id}`, {
         method: "DELETE",
         credentials: 'include',
     })
@@ -8,7 +8,7 @@ export async function DeleteProductById(id) {
 }
 
 export async function getProduct() {
-    const res = await fetch('http://localhost:2000/product', {
+    const res = await fetch('https://top-up-store-production.up.railway.app/product', {
         method: "GET",
         credentials: 'include',
         cache: "no-store",
@@ -18,7 +18,7 @@ export async function getProduct() {
 }
 
 export async function getFilterProductById(filter) {
-    const res = await fetch(`http://localhost:2000/product/get${filter ? `?type=${filter}` : ""}`, {
+    const res = await fetch(`https://top-up-store-production.up.railway.app/product/get${filter ? `?type=${filter}` : ""}`, {
         method: "GET",
         credentials: 'include',
         cache: "no-store",
@@ -28,7 +28,7 @@ export async function getFilterProductById(filter) {
 }
 
 export async function getProductById(id) {
-    const res = await fetch(`http://localhost:2000/product/get/${id}`, {
+    const res = await fetch(`https://top-up-store-production.up.railway.app/product/get/${id}`, {
         method: "GET",
         credentials: 'include',
         cache: "no-store",
@@ -37,7 +37,7 @@ export async function getProductById(id) {
 }
 
 export async function AddProduct(formData) {
-    const res = await fetch('http://localhost:2000/product/add', {
+    const res = await fetch('https://top-up-store-production.up.railway.app/product/add', {
         method: "POST",
         credentials: 'include',
         body: formData
