@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react"
 import { Plus, ArrowLeft, ArrowRight } from "lucide-react"
 import { getProduct } from "@/lib/api/productApi"
-import AddProductForm from "./components/AddProductForm"
-import DetailsProduct from "./components/DetailsProduct"
+import AddProductForm from "./AddProductForm"
+import DetailsProduct from "./DetailsProduct"
 import { useRouter, useSearchParams } from "next/navigation"
-import ListProduct from "./components/ListProduct"
-import AddPackForm from "./components/AddPackForm"
+import ListProduct from "./ListProduct"
+import AddPackForm from "./AddPackForm"
 
 export default function ProductClient() {
     const [listProduct, setListProduct] = useState([])
