@@ -1,18 +1,24 @@
 import admin from "firebase-admin";
 import 'dotenv/config';
 
-if (!process.env.FIREBASE_PRIVATE_KEY) {
-  throw new Error("FIREBASE_PRIVATE_KEY is missing")
+const {
+  PROJECT_ID,
+  CLIENT_EMAIL,
+  PRIVATE_KEY
+} = process.env
+
+if (!PROJECT_ID || !CLIENT_EMAIL || !PRIVATE_KEY) {
+  throw new Error("Firebase env missing")
 }
 
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert(({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    }))
-  });
+    credential: admin.credential.cert({
+      projectId: PROJECT_ID,
+      clientEmail: CLIENT_EMAIL,
+      privateKey: PRIVATE_KEY.replace(/\\n/g, '\n'),
+    }),
+  })
 }
 
 export default admin
