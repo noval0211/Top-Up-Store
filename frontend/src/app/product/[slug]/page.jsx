@@ -8,19 +8,16 @@ import Footer from "@/app/components/footer";
 export default function Product({ params }) {
 
     const [productData, setProductData] = useState()
-
-    const { slug } = React.use(params);
-
-    const parts = slug.split("-")
-    const productId = parts[parts.length - 1]
+    const { id } = params
 
     useEffect(() => {
+        if (!id) return;
         async function fetchData() {
-            const data = await getProductById(productId)
+            const data = await getProductById(id)
             setProductData(data)
         }
         fetchData()
-    }, [productId])
+    }, [id])
 
     if (!productData) {
         return (

@@ -44,7 +44,7 @@ export default function ProductCard({ filter }) {
             {products.map((p) => (
                 <a
                     key={p.id}
-                    href={`/product/${slug(p.name)}-${p.id}`}
+                    href={`/product/${p.id}`}
                     className=" relative w-35 h-50 xl:w-40 xl:h-55 group hover:scale-110 origin-center rounded-xl cursor-pointer
                             ease-in duration-100 transition-all
                             outline-2 outline-[var(--light-color)]">
