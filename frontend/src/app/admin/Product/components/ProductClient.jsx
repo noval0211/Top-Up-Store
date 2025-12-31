@@ -11,10 +11,11 @@ import AddPackForm from "./AddPackForm"
 
 export default function ProductClient() {
     const [listProduct, setListProduct] = useState([])
-    const [addProduct, setAddProduct] = useState(false)
     const [selectProduct, setSelectProduct] = useState()
     const [previewProduct, setPreviewProduct] = useState(false)
     const [showPackForm, setShowPackForm] = useState(false)
+    const [showAddForm, setShowAddForm] = useState(false)
+    const [reload, setReload] = useState(false)
 
     const router = useRouter()
     const searchParam = useSearchParams()
@@ -39,16 +40,7 @@ export default function ProductClient() {
             setListProduct(res)
         }
         FetchDataProduct();
-    }, [])
-
-    const handleAddProduct = () => {
-        if (!addProduct) {
-            setAddProduct(true)
-            setPreviewProduct(false)
-        } else {
-            setAddProduct(false)
-        }
-    }
+    }, [reload])
 
     return (
         <div className="relative w-full h-full p-5 px-10 flex flex-col gap-5">
@@ -71,9 +63,8 @@ export default function ProductClient() {
                         </div>
 
                         <div
-                            onClick={handleAddProduct}
-                            className="text-4xl bg-orange-300 p-2 px-3 scale-75 rounded-full cursor-pointer
-                     flex justify-center items-center gap-2 hover:opacity-80">
+                            onClick={() => setShowAddForm(true)}
+                            className="text-4xl bg-orange-300 p-2 px-3 scale-75 rounded-full cursor-pointer flex justify-center items-center gap-2 hover:opacity-80">
                             <Plus />
                             <span className="text-[1.25rem]">
                                 Add
@@ -85,7 +76,6 @@ export default function ProductClient() {
                         currentPageData={currentPageData}
                         setSelectProduct={setSelectProduct}
                         setPreviewProduct={setPreviewProduct}
-                        setAddProduct={setAddProduct}
                         previewProduct={previewProduct}
                         selectProduct={selectProduct}
                         page={page}
@@ -108,19 +98,21 @@ export default function ProductClient() {
                             disabled={page >= totalPage}
                             onClick={() => changePage(page + 1)}
                             className="bg-[var(--light-color)] text-[var(--background)] rounded-md cursor-pointer hover:opacity-80">
-
                             <ArrowRight />
                         </button>
                     </div>
                 </div>
 
                 <DetailsProduct selectProduct={selectProduct} previewProduct={previewProduct} setPreviewProduct={setPreviewProduct} setShowPackForm={setShowPackForm} />
-
-                <AddProductForm addProduct={addProduct} setAddProduct={setAddProduct} />
-
+                
+                <div className={`${!showAddForm ? 'hidden' : 'flex'} z-30 absolute top-0 left-0 w-full h-full items-center justify-center backdrop-blur-xs`}>
+                    <div onClick={() => setShowAddForm(false)} className="absolute w-full h-full"/>
+                    <AddProductForm  setShowAddForm={setShowAddForm} setReload={setReload}/>
+                </div>
             </div>
+
             <div className={`${!showPackForm ? 'hidden' : 'flex'} absolute z-40 top-0 left-0 w-full h-full`}>
-                <AddPackForm setShowPackForm={setShowPackForm}/>
+                <AddPackForm setShowPackForm={setShowPackForm} />
             </div>
         </div>
     )

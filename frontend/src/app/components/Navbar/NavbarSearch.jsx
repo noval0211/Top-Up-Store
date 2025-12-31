@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { getProduct } from "@/lib/api/product/product.api";
+import { Search } from "lucide-react";
 
 export default function NavbarSearch() {
     const [productName, setProductName] = useState([])
@@ -38,12 +39,11 @@ export default function NavbarSearch() {
     return (
         <div className="hidden sm:flex relative w-full">
             <div className="w-full flex items-center px-4 outline-2 outline-[var(--light-color)] rounded-4xl">
-                <Image src={"/search.png"} alt="search-icon" width={15} height={15}
-                    className="bg-blue absolute " />
+                <Search />
                 <input
                     value={searchSugest}
                     onChange={(e) => setSearchSugest(e.target.value)}
-                    className="w-full pl-8 px-2 py-1 md:py-2 outline-none font-normal" type="search" placeholder="Search . . ." />
+                    className="w-full pl-4 px-2 py-1 md:py-2 outline-none font-normal" type="search" placeholder="Search . . ." />
             </div>
 
             {searchSugest && filteredNames.length > 0 && (

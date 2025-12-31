@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { StepBack } from "lucide-react"
 import Footer from "@/app/components/footer";
+import { Navbar } from "@/app/components/Navbar";
+import Loading from "@/app/components/loading";
 
 export default function Product({ params }) {
 
@@ -23,7 +25,7 @@ export default function Product({ params }) {
         return (
             <main>
                 <div className="w-full h-screen flex pt-26 gap-5 justify-center text-[var(--light-color)]">
-                    <h1>Product not found</h1>
+                    <Loading />
                 </div>
             </main>
         );
@@ -31,13 +33,15 @@ export default function Product({ params }) {
 
     return (
         <div className="text-[var(--light-color)]">
+            <Navbar />
+
             <div className="w-full h-screen flex pt-24 gap-10 justify-center">
                 <div className="w-70 h-fit flex flex-col gap-5">
                     <a
                         href={"/"}
-                        className="w-fit flex gap-2 text-black hover:opacity-55">
+                        className="w-fit flex gap-2 text-[var(--light-color)] hover:opacity-55">
                         <StepBack />
-                        <span>Back to home</span>
+                        <span className="font-bold">Back to home</span>
                     </a>
 
                     <div className="bg-white w-70 h-90 rounded-xl">
@@ -56,7 +60,7 @@ export default function Product({ params }) {
 
                     {/* List Pack  */}
                     <div>
-                        <a className="pl-5">- Packs</a>
+                        <a className="pl-5 font-bold">- Packs</a>
                         <ul className="p-3 flex flex-wrap gap-2">
                             <li className="w-50 px-2 p-1 text-[var(--light-color)] text-sm wrap-break-word outline-[var(--light-color)] outline-2 rounded-md">A</li>
                             <li className="w-50 px-2 p-1 text-[var(--light-color)] text-sm wrap-break-word outline-[var(--light-color)] outline-2 rounded-md">A</li>
@@ -70,10 +74,14 @@ export default function Product({ params }) {
 
                     {/* Payment */}
                     <div>
-                        <a className="pl-5">- Payments</a>
+                        <a className="pl-5 font-bold">- Payments</a>
                         <ul className="p-3 flex flex-wrap gap-2">
                             <li className="w-50 px-2 p-1 text-[var(--light-color)] text-sm wrap-break-word outline-[var(--light-color)] outline-2 rounded-md">A</li>
-
+                            <li className="w-50 px-2 p-1 text-[var(--light-color)] text-sm wrap-break-word outline-[var(--light-color)] outline-2 rounded-md">A</li>
+                            <li className="w-50 px-2 p-1 text-[var(--light-color)] text-sm wrap-break-word outline-[var(--light-color)] outline-2 rounded-md">A</li>
+                            <li className="w-50 px-2 p-1 text-[var(--light-color)] text-sm wrap-break-word outline-[var(--light-color)] outline-2 rounded-md">A</li>
+                            <li className="w-50 px-2 p-1 text-[var(--light-color)] text-sm wrap-break-word outline-[var(--light-color)] outline-2 rounded-md">A</li>
+                            <li className="w-50 px-2 p-1 text-[var(--light-color)] text-sm wrap-break-word outline-[var(--light-color)] outline-2 rounded-md">A</li>    
                         </ul>
                     </div>
                 </div>

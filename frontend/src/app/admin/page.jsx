@@ -5,13 +5,11 @@ import { useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 
 export default function Admin() {
-
     const { user, loading } = useAuth()
     const router = useRouter()
 
     useEffect(() => {
         if (loading) return
-        
         if (!user || user.role !== 'admin') {
             router.replace('/')
             return

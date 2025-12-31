@@ -7,7 +7,6 @@ export default function ListProduct({
     currentPageData,
     setSelectProduct,
     setPreviewProduct,
-    setAddProduct,
     previewProduct,
     selectProduct,
     page, limit
@@ -30,7 +29,6 @@ export default function ListProduct({
             setPreviewProduct(false)
         } else {
             setPreviewProduct(true)
-            setAddProduct(false)
         }
     }
 
