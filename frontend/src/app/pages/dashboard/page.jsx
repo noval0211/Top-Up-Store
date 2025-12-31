@@ -1,8 +1,9 @@
+
 import Footer from "@/app/components/footer";
 import HeroSection from "@/app/components/heroSection";
-import DashboardClient from "./DashboardClient";
+import DashboardClient from "./components/DashboardClient";
 
-export default function Dashboard() {
+export default async function Dashboard() {
 
     return (
         <div className="w-full flex pt-16 flex-col gap-5 items-center text-[var(--light-color)]">

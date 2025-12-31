@@ -19,8 +19,11 @@ export function useAuth() {
             try {
                 const res = await api.get('/auth/me')
                 setUser(res.data)
+            } catch {
+                setUser(null)
+            } finally {
                 setLoading(false)
-            } catch { }
+            }
 
         })
         return () => unsub()

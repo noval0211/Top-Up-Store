@@ -24,7 +24,7 @@ export default function DashboardClient() {
             </ul>
 
             {/* ITEM LISTS */}
-            <div className="w-full min-h-30 flex justify-center">
+            <div className="w-full min-h-30 flex justify-center pb-20">
                 <ProductCard filter={filter} />
             </div>
         </>

@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import admin from "../utils/FirebaseAdmin.js";
-import { response } from "express";
 const prisma = new PrismaClient()
 
 export const getMe = async (req, res) => {
@@ -30,7 +29,7 @@ export const GoogleAuth = async (req, res) => {
 
         res.cookie("session", token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: "lax",
             maxAge: 1000 * 60 * 60 * 24 * 7
         })

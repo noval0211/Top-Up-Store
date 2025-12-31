@@ -39,7 +39,7 @@ export default function AdminLayout() {
                     </li>
                 </ul>
             </div>
-            <div className="text-[var(--light-color)] w-full pt-16 ml-50">
+            <div className="text-[var(--light-color)] w-full h-screen pt-16 ml-50">
                 {activePage === "products" && <Products />}
                 {activePage === "bannerPromo" && <BannerPromo />}
                 {activePage === "codeReferral" && <CodeReferral />}

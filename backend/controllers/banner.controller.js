@@ -17,7 +17,25 @@ export const addBanner = async (req, res) => {
 
 export const removeBanner = async (req, res) => {
     try {
+        const bannerId = Number(req.params.id)
 
+        if (!bannerId) return res.status(404).json({ message: "Id Required" })
+
+        const exists = await prisma.banner.findUnique({
+            where: {
+                id: bannerId
+            }
+        })
+
+        if (!exists) return res.status(404).json({ message: 'Id not found' });
+
+        await prisma.banner.delete({
+            where: {
+                id: bannerId
+            }
+        })
+
+        res.status(200).json({ message: 'Delete Success' });
     } catch (err) {
         res.status(500).json({ message: "Failed to Remove Banner", error: err.message })
     }
@@ -30,7 +48,7 @@ export const showBanner = async (req, res) => {
             ...p,
             image: p.image ? Buffer.from(p.image).toString("base64") : null
         }));
-    res.status(200).json(dataWithBase64);
+        res.status(200).json(dataWithBase64);
 
     } catch (err) {
         res.status(500).json({ message: "Error Showing Banner", error: err.message })
