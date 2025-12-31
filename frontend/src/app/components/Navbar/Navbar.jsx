@@ -22,7 +22,7 @@
     - NavbarUser: Displays user avatar and menu
  
   API:
-    - AuthMe(): Fetches currently logged-in user information
+    - useAuth(): Fetches currently logged-in user information
  
   Props: None (fetches user internally)
 

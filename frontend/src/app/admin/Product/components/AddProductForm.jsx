@@ -2,10 +2,9 @@
 import Image from "next/image"
 import { CircleX } from "lucide-react"
 import { useState } from "react"
-import { AddProduct } from "@/lib/api/productApi"
+import { AddProduct } from "@/lib/api/product/product.api"
 import toast from "react-hot-toast"
-import { useRouter } from "next/navigation"
-export default function AddProductForm({ addProduct, setAddProduct }) {
+export default function AddProductForm({ setShowAddForm, setReload }) {
 
     const [productName, setProductName] = useState('')
     const [producType, setProductType] = useState('games')
@@ -39,7 +38,7 @@ export default function AddProductForm({ addProduct, setAddProduct }) {
 
         const res = await AddProduct(formData)
 
-        if (!res.ok) {
+        if (!res) {
             console.error("failed add product")
             toast.error("failed add product")
             return
@@ -47,13 +46,15 @@ export default function AddProductForm({ addProduct, setAddProduct }) {
 
         toast.success("Product Added")
         handleReset()
+        setShowAddForm(false)
+        setReload(prev => !prev)
     }
 
     return (
-        <div className={`sticky top-25 max-w-100 min-w-100 h-fit ${addProduct ? 'flex' : 'hidden'} transition-all ease-in-out duration-1000 flex-col gap-3 items-center px-5 py-10 bg-[var(--light-color)] text-[var(--background)] rounded-2xl`}>
-                        
+        <div className={`sticky top-25 max-w-100 min-w-100 h-fit transition-all ease-in-out duration-1000 flex flex-col gap-3 items-center px-5 py-10 bg-[var(--light-color)] text-[var(--background)] rounded-2xl`}>
+
             <div className="absolute top-0 right-0 hover:bg-red-500 rounded-full m-2 opacity-80">
-                <CircleX size={35} onClick={() => setAddProduct(false)} className="cursor-pointer text-red-500 hover:text-white transition-all ease-in duration-100" />
+                <CircleX size={35} onClick={() => setShowAddForm(false)} className="cursor-pointer text-red-500 hover:text-white transition-all ease-in duration-100" />
             </div>
             <div className=" rounded-md bg-[var(--background)] text-[var(--light-color)] flex flex-col items-center justify-center outline-1 outline-background shadow-[3px_3px_10px_0px_rgba(0,_0,_0,_1)]">
                 <a>Preview</a>

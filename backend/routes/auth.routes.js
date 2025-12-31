@@ -5,6 +5,6 @@ import { getMe, GoogleAuth } from "../controllers/auth.controller.js";
 const authRouter = Router();
 
 authRouter.get("/me", FirebaseWare, getMe);
-authRouter.post("/firebase", FirebaseWare, GoogleAuth)
+authRouter.post("/firebase", GoogleAuth)
 
 export default authRouter

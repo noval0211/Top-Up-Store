@@ -1,8 +1,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { getFilterProductById } from "../../lib/api/productApi";
-import slug from "slug";
+import { getProductByType } from "../../lib/api/product/product.api";
 
 export default function ProductCard({ filter }) {
 
@@ -11,7 +10,7 @@ export default function ProductCard({ filter }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await getFilterProductById(filter)
+                const data = await getProductByType(filter)
 
                 if (!Array.isArray(data)) {
                     setProducts([]);

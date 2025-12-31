@@ -14,7 +14,6 @@ productRouter.post("/add", upload.single("image"), CreateProduct)
 productRouter.get("/get", GetProductByType)
 productRouter.get("/get/:id", GetProductById)
 productRouter.delete("/delete/:id", DeleteProductById)
-
 productRouter.post('/add-pack', CreateProductPacks)
 
 export default productRouter

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DeleteProductById } from "@/lib/api/productApi";
+import { DeleteProductById } from "@/lib/api/product/product.api";
 import { Settings, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -7,7 +7,6 @@ export default function ListProduct({
     currentPageData,
     setSelectProduct,
     setPreviewProduct,
-    setAddProduct,
     previewProduct,
     selectProduct,
     page, limit
@@ -30,7 +29,6 @@ export default function ListProduct({
             setPreviewProduct(false)
         } else {
             setPreviewProduct(true)
-            setAddProduct(false)
         }
     }
 

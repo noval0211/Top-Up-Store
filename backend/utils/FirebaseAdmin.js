@@ -1,5 +1,4 @@
-import admin from "firebase-admin";
-import 'dotenv/config';
+import admin from 'firebase-admin'
 
 const {
   PROJECT_ID,

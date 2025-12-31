@@ -10,7 +10,7 @@ const upload = multer({
  })
 
 bannerRouter.post("/add",upload.single("image"), addBanner);
-bannerRouter.delete("/remove", removeBanner);
+bannerRouter.delete("/remove/:id", removeBanner);
 bannerRouter.get("/get", showBanner);
 
 export default bannerRouter;
