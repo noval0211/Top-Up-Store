@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react"
 import InputForm from "@/app/components/InputForm";
+import { AddBanner } from "@/lib/api/banner/banner.api";
 export default function BannerPromo() {
 
     const [bannerImage, setBannerImage] = useState(null);
@@ -22,11 +23,7 @@ export default function BannerPromo() {
 
             formData.append('image', bannerImage);
 
-            const response = await fetch("http://localhost:2000/banner/add", {
-                method: "POST",
-                credentials: "include",
-                body: formData,
-            })
+            const response = await AddBanner(formData)
 
             if (response.ok) clearInput();
 

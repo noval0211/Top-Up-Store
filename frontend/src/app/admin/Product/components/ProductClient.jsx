@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Plus, ArrowLeft, ArrowRight } from "lucide-react"
-import { getProduct } from "@/lib/api/productApi"
+import { getProduct } from "@/lib/api/product/product.api"
 import AddProductForm from "./AddProductForm"
 import DetailsProduct from "./DetailsProduct"
 import { useRouter, useSearchParams } from "next/navigation"

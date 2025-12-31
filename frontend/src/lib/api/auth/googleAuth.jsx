@@ -1,23 +1,6 @@
-export async function GoogleAuth(token) {
-    try {
-        if (!token) return { ok: false, message: "No token provided" }
+import { api } from "../axios"
 
-        const res = await fetch("https://top-up-store-production.up.railway.app/auth/firebase", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-        })
-        if (!res.ok) {
-            let message = "Failed to Register"
-            return { ok: false, message }
-        }
-
-        const data = await res.json()
-        return { ok: true, data }
-    } catch (err) {
-        console.error('Failed to connect server:', err.message)
-        return { ok: false, message: "Failed to connect server" }
-    }
+export const GoogleAuth = async (token) => {
+    const { data } = await api.post('/auth/firebase', {token} )
+    return data
 }

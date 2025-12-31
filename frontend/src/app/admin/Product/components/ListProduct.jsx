@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DeleteProductById } from "@/lib/api/productApi";
+import { DeleteProductById } from "@/lib/api/product/product.api";
 import { Settings, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 

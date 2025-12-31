@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { getProduct } from "@/lib/api/productApi";
+import { getProduct } from "@/lib/api/product/product.api";
 
 export default function NavbarSearch() {
     const [productName, setProductName] = useState([])

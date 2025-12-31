@@ -1,25 +1,13 @@
 import admin from "../utils/FirebaseAdmin.js";
 
 export async function FirebaseWare(req, res, next) {
+    const session = req.cookies.session
+    if (!session) return res.status(401).json(null)
     try {
-        const authHeader = req.headers.authorization;
-
-        if (!authHeader) {
-            return res.status(401).json({ message: "Authorization header missing" });
-        }
-
-        if (!authHeader.startsWith("Bearer ")) {
-            return res.status(401).json({ message: "Invalid auth format" });
-        }
-
-        const token = authHeader.slice(7); // remove "Bearer "
-
-        const decoded = await admin.auth().verifyIdToken(token);
-
-        req.firebaseUser = decoded; // uid, email, name, picture, etc
-        next();
+        const decoded = await admin.auth().verifyIdToken(session)
+        req.firebaseUser = decoded
+        next()
     } catch (err) {
-        console.error("Firebase auth error:", err.message);
-        return res.status(401).json({ message: "Invalid or expired token" });
+        return res.status(401).json(null)
     }
 }

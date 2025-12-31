@@ -1,5 +1,6 @@
 'use client'
 import app from "@/app/auth/Firebase/firebase"
+import { api } from "@/lib/api/axios"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { useEffect, useState } from "react"
 
@@ -15,22 +16,12 @@ export function useAuth() {
                 setLoading(false)
                 return
             }
+            try {
+                const res = await api.get('/auth/me')
+                setUser(res.data)
+                setLoading(false)
+            } catch { }
 
-            const token = await user.getIdToken();
-
-            const res = await fetch("https://top-up-store-production.up.railway.app/auth/me", {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                },
-                credentials: "include",
-            })
-
-            if (!res.ok) return null
-
-            const data = await res.json()
-            setUser(data)
-            setLoading(false)
         })
         return () => unsub()
     }, [])

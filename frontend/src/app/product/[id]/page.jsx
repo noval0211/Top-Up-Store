@@ -1,5 +1,5 @@
 'use client'
-import { getProductById } from "@/lib/api/productApi";
+import { getProductById } from "@/lib/api/product/product.api";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { StepBack } from "lucide-react"
@@ -8,7 +8,7 @@ import Footer from "@/app/components/footer";
 export default function Product({ params }) {
 
     const [productData, setProductData] = useState()
-    const { id } = params
+    const { id } = React.use(params)
 
     useEffect(() => {
         if (!id) return;

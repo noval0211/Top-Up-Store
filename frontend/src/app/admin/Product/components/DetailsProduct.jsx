@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { getProductById } from "@/lib/api/productApi";
+import { getProductById } from "@/lib/api/product/product.api";
 import { CircleX, SquarePen, Plus, Trash } from "lucide-react"
 import Image from "next/image"
 
 export default function DetailsProduct({ selectProduct, previewProduct, setPreviewProduct, setShowPackForm }) {
-
+    
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -12,6 +12,7 @@ export default function DetailsProduct({ selectProduct, previewProduct, setPrevi
         async function fetchData() {
             try {
                 const data = await getProductById(selectProduct)
+                console.log(data)
                 setProducts(data)
             } catch (err) {
                 console.log(err)

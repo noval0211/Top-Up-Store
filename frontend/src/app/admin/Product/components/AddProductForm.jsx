@@ -2,7 +2,7 @@
 import Image from "next/image"
 import { CircleX } from "lucide-react"
 import { useState } from "react"
-import { AddProduct } from "@/lib/api/productApi"
+import { AddProduct } from "@/lib/api/product/product.api"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 export default function AddProductForm({ addProduct, setAddProduct }) {

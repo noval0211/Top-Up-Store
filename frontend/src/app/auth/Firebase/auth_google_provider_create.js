@@ -1,5 +1,5 @@
 
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import app from "./firebase";
 
 export default async function signInGoogle() {
