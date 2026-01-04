@@ -38,13 +38,13 @@ export default function AddProductForm({ setShowAddForm, setReload }) {
 
         const res = await AddProduct(formData)
 
-        if (!res) {
-            console.error("failed add product")
-            toast.error("failed add product")
+        if (!res.success) {
+            console.error(res.message)
+            toast.error(res.message)
             return
         }
 
-        toast.success("Product Added")
+        toast.success(res.message)
         handleReset()
         setShowAddForm(false)
         setReload(prev => !prev)

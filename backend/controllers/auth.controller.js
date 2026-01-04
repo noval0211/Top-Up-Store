@@ -19,22 +19,30 @@ export const getMe = async (req, res) => {
 
 export const GoogleAuth = async (req, res) => {
     try {
-        const { token } = req.body
-        
-        if (!token) {
-            return res.status(400).json({ message: "Token required" })
+        const authHeader = req.headers.authorization
+
+        if (!authHeader?.startsWith("Bearer ")) {
+            return res.status(401).json({ message: "Invalid auth header" });
         }
+
+        const token = authHeader?.split("Bearer ")[1]
+        
+        if (!token) return res.status(401).json(null)
 
         const dataUser = await admin.auth().verifyIdToken(token)
 
-        res.cookie("session", token, {
+        const sessionCookie = await admin.auth().createSessionCookie(token, {
+            expiresIn: 1000 * 60 * 60 * 24 * 7
+        })
+        
+        res.cookie("session", sessionCookie, {
             httpOnly: true,
-            secure: true,
+            secure: false,
             sameSite: "lax",
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
 
-        const user = await prisma.userAccounts.findUnique({
+        let user = await prisma.userAccounts.findUnique({
             where: { email: dataUser.email }
         })
 

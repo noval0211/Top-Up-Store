@@ -3,24 +3,24 @@ import { getProductById } from "@/lib/api/product/product.api";
 import { CircleX, SquarePen, Plus, Trash } from "lucide-react"
 import Image from "next/image"
 
-export default function DetailsProduct({ selectProduct, previewProduct, setPreviewProduct, setShowPackForm }) {
-    
+export default function DetailsProduct({ selectProduct, previewProduct, setPreviewProduct, setShowPackForm, setProduct }) {
+
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
         if (!selectProduct) return
+
         async function fetchData() {
             try {
                 const data = await getProductById(selectProduct)
-                console.log(data)
-                setProducts(data)
+                setProducts(data.data)
+                setProduct(data.data)
             } catch (err) {
                 console.log(err)
             }
         }
         fetchData()
     }, [selectProduct]);
-
 
     return (
         <>
@@ -38,7 +38,7 @@ export default function DetailsProduct({ selectProduct, previewProduct, setPrevi
                     </div>
                     <div className="flex text-center p-1 px-3 rounded-md bg-[var(--background)] text-[var(--light-color)] min-w-50 max-w-[90%]">
                         <a className='w-full truncate'>
-                            {products.name} 
+                            {products.name}
                         </a>
                     </div>
                     <div className="w-full flex flex-col gap-2 mt-5 ">
@@ -46,9 +46,9 @@ export default function DetailsProduct({ selectProduct, previewProduct, setPrevi
                             <a className="">
                                 List Pack
                             </a>
-                            <div 
-                            onClick={() => setShowPackForm(true)}
-                            className="w-fit bg-orange-300 py-1 px-2 rounded-md cursor-pointer flex hover:opacity-80">
+                            <div
+                                onClick={() => setShowPackForm(true)}
+                                className="w-fit bg-orange-300 py-1 px-2 rounded-md cursor-pointer flex hover:opacity-80">
                                 <Plus />
                                 <span>Add Pack</span>
                             </div>

@@ -1,0 +1,24 @@
+{
+  "name": "topupstore",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/noval0211/Top-Up-Store#readme",
+  "bugs": {
+    "url": "https://github.com/noval0211/Top-Up-Store/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noval0211/Top-Up-Store.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
