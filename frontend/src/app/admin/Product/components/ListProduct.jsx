@@ -7,11 +7,10 @@ export default function ListProduct({
     currentPageData,
     setSelectProduct,
     setPreviewProduct,
-    previewProduct,
     selectProduct,
     page, limit
 }) {
-    const [statusProduct, setStatusProduct] = useState(false)
+    const [statusProduct, setStatusProduct] = useState({})
 
     const deleteProductById = async (id) => {
         const res = await DeleteProductById(id)
@@ -20,16 +19,12 @@ export default function ListProduct({
             return
         }
         toast.success(res.message)
-        location.reload()
     }
 
     const handleProduct = (productId) => {
+        if (selectProduct == productId) return
         setSelectProduct(productId)
-        if (previewProduct && selectProduct == productId) {
-            setPreviewProduct(false)
-        } else {
-            setPreviewProduct(true)
-        }
+        setPreviewProduct(prev => !(prev && selectProduct == productId))
     }
 
     const toggleStatus = (productId) => {

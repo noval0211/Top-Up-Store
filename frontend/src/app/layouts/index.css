@@ -1,9 +1,0 @@
-
-:root {
-    --animated-scroll-slider: scroll-slider 40s infinite linear;
-}
-
-@keyframes scroll-slider {
-    from { transform: translateX(0) }
-    to { transform: translateX(calc(-100% - 16px)) }
-}

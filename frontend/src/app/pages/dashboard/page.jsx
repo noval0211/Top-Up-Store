@@ -6,7 +6,7 @@ import DashboardClient from "./components/DashboardClient";
 export default async function Dashboard() {
 
     return (
-        <div className="w-full flex pt-16 flex-col gap-5 items-center text-[var(--light-color)]">
+        <div className="w-full flex pt-14 flex-col gap-5 items-center text-[var(--light-color)]">
             {/* ADS / PROMO */}
             <section className="w-full h-fit">
                 <HeroSection />

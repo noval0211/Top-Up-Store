@@ -10,14 +10,14 @@ export default function ProductCard({ filter }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await getProductByType(filter)
+                const res = await getProductByType(filter)
 
-                if (!Array.isArray(data)) {
+                if (!Array.isArray(res.data)) {
                     setProducts([]);
                     return;
                 }
 
-                setProducts(data)
+                setProducts(res.data)
             } catch (err) {
                 console.log(err)
             }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import InputForm from "../components/InputForm";
 import Image from "next/image";
-import signInGoogle from "./Firebase/auth_google_provider_create";
+import signInGoogle from "./Firebase/auth_google_provider_signin";
 import { GoogleAuth } from "@/lib/api/auth/googleAuth";
 
 export default function Login() {

@@ -91,7 +91,10 @@ export const GetProductById = async (req, res) => {
         }
 
         const data = await prisma.product.findUnique({
-            where: { id: id }
+            where: { id: id },
+            include: {
+                productPacks: true
+            }
         })
 
         if (!data) {
@@ -100,7 +103,12 @@ export const GetProductById = async (req, res) => {
 
         const dataWithBase64 = {
             ...data,
-            image: data.image ? Buffer.from(data.image).toString("base64") : null
+            image: data.image ? Buffer.from(data.image).toString("base64") : null,
+            productPacks: data.productPacks.map(packs => ({
+                id: packs.id.toString(),
+                name: packs.name,
+                price: packs.price
+            }))
         }
 
         res.json(dataWithBase64)
@@ -112,12 +120,6 @@ export const GetProductById = async (req, res) => {
 export const CreateProductPacks = async (req, res) => {
     try {
         const { id, name, price } = req.body;
-
-        const exists = await prisma.productPacks.findUnique({
-            where: { productId: id }
-        })
-
-        if (exists) return res.status(302).json({ message: 'Pack was created' });
 
         const result = await prisma.productPacks.create({
             data: {

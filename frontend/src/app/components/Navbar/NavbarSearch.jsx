@@ -43,7 +43,7 @@ export default function NavbarSearch() {
                 <input
                     value={searchSugest}
                     onChange={(e) => setSearchSugest(e.target.value)}
-                    className="w-full pl-4 px-2 py-1 md:py-2 outline-none font-normal" type="search" placeholder="Search . . ." />
+                    className="w-full pl-4 px-2 py-1 outline-none font-normal" type="search" placeholder="Search . . ." />
             </div>
 
             {searchSugest && filteredNames.length > 0 && (

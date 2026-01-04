@@ -45,7 +45,7 @@ export default function Navbar() {
   const { user } = useAuth()
 
   return (
-    <div className="z-50 fixed top-0 left-0 bg-[var(--background)] w-full h-16 pr-5 sm:pr-10
+    <div className="z-50 fixed top-0 left-0 bg-[var(--background)] w-full h-14 pr-5 sm:pr-10
             text-[var(--light-color)] font-extrabold
             flex items-center sm:justify-between gap-10
             border-b-[1px] border-[var(--foreground)]">
