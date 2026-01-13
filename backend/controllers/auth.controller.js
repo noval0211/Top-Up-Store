@@ -49,7 +49,7 @@ export const AnonymousAuth = async (req, res) => {
             // Set cookie options
             res.cookie("session", sessionCookie, {
                 httpOnly: true,
-                secure: true,
+                //secure: true,
                 sameSite: "none",
                 maxAge: 1000 * 60 * 60 * 24 * 7
             });
@@ -100,7 +100,7 @@ export const GoogleAuth = async (req, res) => {
         // Set cookie options
         res.cookie("session", sessionCookie, {
             httpOnly: true,
-            secure: true,
+            //secure: true,
             sameSite: "none",
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
