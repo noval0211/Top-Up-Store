@@ -14,5 +14,6 @@ export default async function signInAnonymouse() {
     // Get ID token
     const idToken = await user.getIdToken();
 
+    console.log(idToken)
     return { token: idToken }
 }
