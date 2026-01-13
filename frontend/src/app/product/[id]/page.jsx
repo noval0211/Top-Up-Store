@@ -3,7 +3,7 @@ import { getProductById } from "@/lib/api/product/product.api";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { StepBack } from "lucide-react"
-import { Footer } from "@/app/components/Footer";
+import Footer from "@/app/components/Footer";
 import { Navbar } from "@/app/components/Navbar";
 import Loading from "@/app/components/Loading";
 import OrderSummary from "@/app/product/[id]/components/OrderSummary";
