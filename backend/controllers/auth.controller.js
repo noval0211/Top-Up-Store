@@ -22,60 +22,63 @@ export const GetMe = async (req, res) => {
 }
 
 // Anonymous Authentication
-export const AnonymousAuth = async (req, res) => { {
-    try {
-        const authHeader = req.headers.authorization
-        
-        // Check if auth header is valid
-        if (!authHeader?.startsWith("Bearer ")) {
-            return res.status(401).json({ message: "Invalid auth header" });
-        }
+export const AnonymousAuth = async (req, res) => {
+    {
+        try {
+            const authHeader = req.headers.authorization
+            console.log('header anon:', authHeader)
 
-        // Extract token from header
-        const token = authHeader?.split("Bearer ")[1]
-
-        // If no token, return 401
-        if (!token) return res.status(401).json(null)
-
-        // verify the ID token
-        const userRecord = await admin.auth().verifyIdToken(token)
-
-        // Create session cookie
-        const sessionCookie = await admin.auth().createSessionCookie(token, {
-            expiresIn: 1000 * 60 * 60 * 24 * 30
-        });
-
-        // Set cookie options
-        res.cookie("session", sessionCookie, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            path: '/',
-            maxAge: 1000 * 60 * 60 * 24 * 30
-        });
-
-        // Create user in database
-        const user = await prisma.userAccounts.create({
-            data: {
-                uid: userRecord.uid,
-                name: "Anonymous",
-                email: null,
-                avatar: null,
-                provider: "anonymous"
+            // Check if auth header is valid
+            if (!authHeader?.startsWith("Bearer ")) {
+                return res.status(401).json({ message: "Invalid auth header" });
             }
-        });
 
-        res.status(200).json(user);
-    } catch (err) {
-        return res.status(500).json({ message: "Server error" });
+            // Extract token from header
+            const token = authHeader?.split("Bearer ")[1]
+
+            // If no token, return 401
+            if (!token) return res.status(401).json(null)
+
+            // verify the ID token
+            const userRecord = await admin.auth().verifyIdToken(token)
+
+            // Create session cookie
+            const sessionCookie = await admin.auth().createSessionCookie(token, {
+                expiresIn: 1000 * 60 * 60 * 24 * 30
+            });
+
+            // Set cookie options
+            res.cookie("session", sessionCookie, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+                path: '/',
+                maxAge: 1000 * 60 * 60 * 24 * 30
+            });
+
+            // Create user in database
+            const user = await prisma.userAccounts.create({
+                data: {
+                    uid: userRecord.uid,
+                    name: "Anonymous",
+                    email: null,
+                    avatar: null,
+                    provider: "anonymous"
+                }
+            });
+
+            res.status(200).json(user);
+        } catch (err) {
+            return res.status(500).json({ message: "Server error" });
+        }
     }
-}}
+}
 
 // Google Authentication
 export const GoogleAuth = async (req, res) => {
     try {
         const authHeader = req.headers.authorization
-
+        console.log('header google:', authHeader)
         // Check if auth header is valid
         if (!authHeader?.startsWith("Bearer ")) {
             return res.status(401).json({ message: "Invalid auth header" });
