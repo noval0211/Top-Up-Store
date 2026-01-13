@@ -43,7 +43,7 @@ export const AnonymousAuth = async (req, res) => {
 
             // Create session cookie
             const sessionCookie = await admin.auth().createSessionCookie(token, {
-                expiresIn: 1000 * 60 * 60 * 24 * 30
+                expiresIn: 1000 * 60 * 60 * 24 * 7
             });
 
             // Set cookie options
@@ -51,7 +51,7 @@ export const AnonymousAuth = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 sameSite: "none",
-                maxAge: 1000 * 60 * 60 * 24 * 30
+                maxAge: 1000 * 60 * 60 * 24 * 7
             });
 
             // Create user in database
@@ -95,8 +95,6 @@ export const GoogleAuth = async (req, res) => {
             expiresIn: 1000 * 60 * 60 * 24 * 7
         })
 
-        console.log("secure?", req.secure)
-
         // Set cookie options
         res.cookie("session", sessionCookie, {
             httpOnly: true,
@@ -125,5 +123,20 @@ export const GoogleAuth = async (req, res) => {
         res.status(200).json(user);
     } catch (err) {
         return res.status(500).json({ message: "Server error" });
+    }
+}
+
+export const Logout = async (req, res) => {
+    try {
+        res.clearCookie('session', {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'lax',
+        })
+
+        res.status(200).json({ message: 'Logged Out' })
+
+    } catch (err) {
+        return res.status(400).json({ message: "Failed to logout" })
     }
 }

@@ -1,5 +1,4 @@
 import GoogleSignOut from "../auth/Firebase/auth_google_provider_signout";
-
 export default function Profile() {
 
     const handleLogout = async () => {

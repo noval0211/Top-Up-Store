@@ -20,15 +20,13 @@ const limiter = rateLimit({
   ipv6Subnet: 56,
 })
 
-app.set("trust proxy", 1)
-
 app.use(cors({
   origin: process.env.CORS_ORIGIN,
   credentials: true
 }));
 
 app.use(compression())
-app.use(limiter)
+// app.use(limiter)
 app.use(express.json());
 app.use(cookieParser());
 
