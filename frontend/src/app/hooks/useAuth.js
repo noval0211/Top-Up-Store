@@ -15,17 +15,17 @@ export function useAuth() {
 
         const unsub = onAuthStateChanged(auth, async (user) => {
             try {
-                // If user exists, get user data from backend
-                const res = await api.get('/auth/me')
-                
+                console.log(user)
                 // If no user, sign in anonymously
-                if (!res) {
+                if (!user) {
                     const { token } = await signInAnonymouse()
                     const res = await AnonymousAuth(token)
                     setUser(res.data)
                     return
                 }
 
+                // If user exists, get user data from backend
+                const res = await api.get('/auth/me')
                 setUser(res.data)
             } catch {
                 setUser(null)
