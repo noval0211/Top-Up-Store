@@ -1,5 +1,4 @@
 
-
 export default function Footer() {
     return (
         <footer className="w-full h-fit flex flex-col gap-2 items-center justify-center bg-[var(--foreground)] text-white">
