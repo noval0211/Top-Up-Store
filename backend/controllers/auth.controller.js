@@ -49,8 +49,8 @@ export const AnonymousAuth = async (req, res) => {
             // Set cookie options
             res.cookie("session", sessionCookie, {
                 httpOnly: true,
-                secure: false,
-                sameSite: "lax",
+                secure: true,
+                sameSite: "none",
                 maxAge: 1000 * 60 * 60 * 24 * 7
             });
             res.send('Cookie is set')
@@ -100,8 +100,8 @@ export const GoogleAuth = async (req, res) => {
         // Set cookie options
         res.cookie("session", sessionCookie, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
         res.send('Cookie is set')
