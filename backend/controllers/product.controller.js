@@ -86,12 +86,15 @@ export const GetProductByType = async (req, res) => {
 export const GetProductById = async (req, res) => {
     try {
         const { id } = req.params;
+
         if (!id) {
             return res.status(400).json({ message: "ID is required" });
         }
 
         const data = await prisma.product.findUnique({
-            where: { id: id },
+            where: {
+                id: String(id)
+            },
             include: {
                 productPacks: true
             }

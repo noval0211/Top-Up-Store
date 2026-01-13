@@ -1,7 +1,7 @@
 
 'use client'
 import { useContext } from "react"
-import { ThemeContext } from "@/app/context/themeContext"
+import { ThemeContext } from "@/app/context/ThemeContext"
 import { Sun, Moon } from 'lucide-react'
 export default function NavbarTheme() {
     const { theme, toggleTheme } = useContext(ThemeContext)

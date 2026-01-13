@@ -38,6 +38,7 @@ export default function Login() {
                 console.error(googleAuth.data || googleAuth.message)
                 return
             }
+            window.location.reload()    
         } catch (err) {
             console.error(err)
         }

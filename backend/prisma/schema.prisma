@@ -8,14 +8,14 @@ datasource db {
 }
 
 model userAccounts {
-  uid        String   @id
-  name       String?
-  email      String   @unique
-  avatar     String?
-  provider   String?
-  role       String   @default("user")
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  uid       String   @id
+  name      String?
+  email     String   @unique
+  avatar    String?
+  provider  String?
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model product {
@@ -30,11 +30,11 @@ model product {
 }
 
 model productPacks {
-  id        BigInt  @id @default(autoincrement())
-  product   product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  id        String @unique @id @default(uuid())
   productId String
   name      String
   price     Decimal
+  product   product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@index([productId])
 }
@@ -43,4 +43,15 @@ model banner {
   id        Int      @id @default(autoincrement())
   image     Bytes?
   createdAt DateTime @default(now())
+}
+
+model transactions {
+  id          String   @id @default(uuid())
+  userId      String
+  productPack String
+  amount      Decimal
+  method      String
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 }

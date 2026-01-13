@@ -27,7 +27,7 @@ CREATE TABLE "product" (
 
 -- CreateTable
 CREATE TABLE "productPacks" (
-    "id" BIGSERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "productId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "price" DECIMAL(65,30) NOT NULL,
@@ -44,8 +44,24 @@ CREATE TABLE "banner" (
     CONSTRAINT "banner_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "transactions" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "productPack" TEXT NOT NULL,
+    "amount" DECIMAL(65,30) NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'pending',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "transactions_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "userAccounts_email_key" ON "userAccounts"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "productPacks_id_key" ON "productPacks"("id");
 
 -- CreateIndex
 CREATE INDEX "productPacks_productId_idx" ON "productPacks"("productId");

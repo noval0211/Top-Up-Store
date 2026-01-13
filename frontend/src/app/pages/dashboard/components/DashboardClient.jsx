@@ -1,5 +1,5 @@
 'use client'
-import ProductCard from "@/app/components/productCard";
+import ProductCard from "@/app/components/ProductCard";
 import { useState } from "react";
 export default function DashboardClient() {
 

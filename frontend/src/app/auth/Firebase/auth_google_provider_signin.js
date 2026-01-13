@@ -17,8 +17,5 @@ export default async function signInGoogle() {
     const user = result.user;
     const idToken = await user.getIdToken()
     
-    window.location.reload()
-    return {
-        token: idToken,
-    }
+    return { status: true, token: idToken,}
 }

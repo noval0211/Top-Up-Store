@@ -36,7 +36,7 @@
 */
 
 'use client'
-import { NavbarSearch, NavbarTheme, NavbarPesanan, NavbarUser } from '@/app/components/Navbar'
+import { NavbarSearch, NavbarTheme, NavbarPesanan, NavbarUser, NavbarHistory } from '@/app/components/Navbar'
 import { useAuth } from '@/app/hooks/useAuth'
 import { Menu } from 'lucide-react'
 
@@ -45,19 +45,19 @@ export default function Navbar() {
   const { user } = useAuth()
 
   return (
-    <div className="z-50 fixed top-0 left-0 bg-[var(--background)] w-full h-14 pr-5 sm:pr-10
+    <div className="z-50 fixed top-0 left-0 bg-[var(--background)] w-full h-14 pr-5 sm:pr-10 select-none
             text-[var(--light-color)] font-extrabold
             flex items-center sm:justify-between gap-10
             border-b-[1px] border-[var(--foreground)]">
 
       <div className='flex w-full md:w-[60%] h-full items-center'>
         {/* MOBILE */}
-        <div className='flex justify-center items-center md:hidden p-5 sm:p-0 sm:pl-5 sm:bg-linear-to-r from-orange-400 bg-orange-400 h-full'>
+        <div className='flex justify-center items-center md:hidden p-5 sm:p-0 sm:pl-5 sm:bg-linear-to-r from-orange-600 bg-orange-600 h-full'>
           <Menu width={30} height={30} />
         </div>
 
         {/* BRAND NAME */}
-        <div className='sm:bg-linear-to-r from-orange-400 text-sm lg:text-md w-50 sm:w-80 h-full flex items-center justify-center'>
+        <div className='sm:bg-linear-to-r from-orange-600 text-sm lg:text-md w-50 sm:w-80 h-full flex items-center justify-center'>
           <a href={"/"} className='cursor-pointer '>
             N A M E . S T O R E
           </a>
@@ -67,9 +67,10 @@ export default function Navbar() {
         <NavbarSearch />
       </div>
 
-      <div className="hidden md:flex gap-5 items-center  text-sm">
-        {/* THEME */}
-        <NavbarTheme />
+      <div className="hidden md:flex gap-5 items-center text-sm">
+
+        {/* HISTORY */}
+        <NavbarHistory />
 
         {/* CONDITIONAL ROLE ACTION: ADMIN CONTROL(ADMIN) / PESANANAN(USER) */}
         {user?.role === 'admin' ? (
@@ -84,6 +85,9 @@ export default function Navbar() {
 
         {/* USER */}
         <NavbarUser user={user} />
+
+        {/* THEME TOGGLE */}
+        <NavbarTheme />
       </div>
     </div>
   )

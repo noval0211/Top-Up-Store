@@ -1,6 +1,6 @@
 
-import Footer from "@/app/components/footer";
-import HeroSection from "@/app/components/heroSection";
+import Footer from "@/app/components/Footer";
+import HeroSection from "@/app/components/HeroSection";
 import DashboardClient from "./components/DashboardClient";
 
 export default async function Dashboard() {

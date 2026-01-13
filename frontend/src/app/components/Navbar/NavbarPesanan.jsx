@@ -10,7 +10,7 @@ export default function NavbarPesanan() {
         <>
             <div
                 onClick={() => setshowPesanan(true)}
-                className="hidden lg:flex flex-col items-center lg:flex-row hover:border-b-2 cursor-pointer px-2 ease-in-out duration-65 transition-all">
+                className="hidden lg:flex flex-col items-center lg:flex-row hover:border-b-2 cursor-pointer px-2 py-0.5 ease-in-out duration-65 transition-all">
                 <span>Cek</span>
                 <span>Pesanan</span>
             </div>
