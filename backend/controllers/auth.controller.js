@@ -26,7 +26,7 @@ export const AnonymousAuth = async (req, res) => {
     {
         try {
             const authHeader = req.headers.authorization
-            console.log(authHeader)
+
             // Check if auth header is valid
             if (!authHeader?.startsWith("Bearer ")) {
                 return res.status(401).json({ message: "Invalid auth header" });
@@ -40,19 +40,17 @@ export const AnonymousAuth = async (req, res) => {
 
             // verify the ID token
             const userRecord = await admin.auth().verifyIdToken(token)
-            console.log(userRecord)
+
             // Create session cookie
             const sessionCookie = await admin.auth().createSessionCookie(token, {
                 expiresIn: 1000 * 60 * 60 * 24 * 30
             });
 
-            console.log(sessionCookie)
             // Set cookie options
             res.cookie("session", sessionCookie, {
                 httpOnly: true,
                 secure: true,
                 sameSite: "none",
-                path: '/',
                 maxAge: 1000 * 60 * 60 * 24 * 30
             });
 
@@ -66,7 +64,6 @@ export const AnonymousAuth = async (req, res) => {
                     provider: "anonymous"
                 }
             });
-            console.log(user)
 
             res.status(200).json(user);
         } catch (err) {
@@ -80,7 +77,6 @@ export const GoogleAuth = async (req, res) => {
     try {
         const authHeader = req.headers.authorization
 
-        console.log(authHeader)
         // Check if auth header is valid
         if (!authHeader?.startsWith("Bearer ")) {
             return res.status(401).json({ message: "Invalid auth header" });
@@ -94,18 +90,15 @@ export const GoogleAuth = async (req, res) => {
 
         // Verify the ID token
         const userRecord = await admin.auth().verifyIdToken(token)
-        console.log(token)
         // Create session cookie
         const sessionCookie = await admin.auth().createSessionCookie(token, {
             expiresIn: 1000 * 60 * 60 * 24 * 7
         })
-        console.log(sessionCookie)
         // Set cookie options
         res.cookie("session", sessionCookie, {
             httpOnly: true,
             secure: true,
             sameSite: "none",
-            path: '/',
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
 
@@ -126,7 +119,6 @@ export const GoogleAuth = async (req, res) => {
                 }
             })
         }
-        console.log(user)
         res.status(200).json(user);
     } catch (err) {
         return res.status(500).json({ message: "Server error" });
