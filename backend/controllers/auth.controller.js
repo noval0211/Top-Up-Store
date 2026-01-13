@@ -50,7 +50,7 @@ export const AnonymousAuth = async (req, res) => {
             res.cookie("session", sessionCookie, {
                 httpOnly: true,
                 secure: true,
-                sameSite: "none",
+                sameSite: "strict",
                 maxAge: 1000 * 60 * 60 * 24 * 7
             });
 
@@ -90,6 +90,7 @@ export const GoogleAuth = async (req, res) => {
 
         // Verify the ID token
         const userRecord = await admin.auth().verifyIdToken(token)
+        
         // Create session cookie
         const sessionCookie = await admin.auth().createSessionCookie(token, {
             expiresIn: 1000 * 60 * 60 * 24 * 7
@@ -99,7 +100,7 @@ export const GoogleAuth = async (req, res) => {
         res.cookie("session", sessionCookie, {
             httpOnly: true,
             secure: true,
-            sameSite: "none",
+            sameSite: "strict",
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
 
