@@ -50,9 +50,10 @@ export const AnonymousAuth = async (req, res) => {
             res.cookie("session", sessionCookie, {
                 httpOnly: true,
                 secure: true,
-                sameSite: "strict",
+                sameSite: "none",
                 maxAge: 1000 * 60 * 60 * 24 * 7
             });
+            res.send('Cookie is set')
 
             // Create user in database
             const user = await prisma.userAccounts.create({
@@ -90,7 +91,7 @@ export const GoogleAuth = async (req, res) => {
 
         // Verify the ID token
         const userRecord = await admin.auth().verifyIdToken(token)
-        
+
         // Create session cookie
         const sessionCookie = await admin.auth().createSessionCookie(token, {
             expiresIn: 1000 * 60 * 60 * 24 * 7
@@ -100,9 +101,10 @@ export const GoogleAuth = async (req, res) => {
         res.cookie("session", sessionCookie, {
             httpOnly: true,
             secure: true,
-            sameSite: "strict",
+            sameSite: "none",
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
+        res.send('Cookie is set')
 
         // Check if user exists in database
         let user = await prisma.userAccounts.findUnique({
