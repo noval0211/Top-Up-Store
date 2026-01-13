@@ -78,7 +78,6 @@ export const AnonymousAuth = async (req, res) => {
 export const GoogleAuth = async (req, res) => {
     try {
         const authHeader = req.headers.authorization
-        console.log('header google:', authHeader)
         // Check if auth header is valid
         if (!authHeader?.startsWith("Bearer ")) {
             return res.status(401).json({ message: "Invalid auth header" });

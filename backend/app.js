@@ -20,7 +20,7 @@ const limiter = rateLimit({
   ipv6Subnet: 56,
 })
 
-console.log("CORS ORIGIN:", process.env.CORS_ORIGIN);
+app.set("trust proxy", 1)
 
 app.use(cors({
   origin: process.env.CORS_ORIGIN,
@@ -28,7 +28,7 @@ app.use(cors({
 }));
 
 app.use(compression())
-//app.use(limiter)
+app.use(limiter)
 app.use(express.json());
 app.use(cookieParser());
 
@@ -37,6 +37,7 @@ app.use('/product', productRouter);
 app.use('/banner', bannerRouter);
 app.use('/payment', paymentRouter);
 app.use('/transaction', transactionRouter)
+
 const port = process.env.PORT
 
 app.listen(port, () => {
