@@ -17,7 +17,6 @@ export default function NavbarHistory() {
 
     if (isLoading) return
 
-    console.log(historyData)
     return (
         <div className="relative flex items-center justify-center">
             <div
