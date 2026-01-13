@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import admin from "../utils/FirebaseAdmin.js";
-import { use } from "react";
 const prisma = new PrismaClient()
 
 // Get current user
