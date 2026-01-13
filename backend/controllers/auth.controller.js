@@ -46,14 +46,16 @@ export const AnonymousAuth = async (req, res) => {
                 expiresIn: 1000 * 60 * 60 * 24 * 7
             });
 
-            // Set cookie options
+            // Set cookie options (secure required when sameSite is 'none' in production)
+            const isProd = process.env.NODE_ENV === 'production';
+            console.log('Auth: setting session cookie', { uid: userRecord.uid, isProd, cookieLength: sessionCookie?.length });
             res.cookie("session", sessionCookie, {
                 httpOnly: true,
-                //secure: true,
-                sameSite: "none",
-                maxAge: 1000 * 60 * 60 * 24 * 7
+                secure: isProd,
+                sameSite: isProd ? "none" : "lax",
+                maxAge: 1000 * 60 * 60 * 24 * 7,
+                path: '/'
             });
-            res.send('Cookie is set')
 
             // Create user in database
             const user = await prisma.userAccounts.create({
@@ -66,7 +68,7 @@ export const AnonymousAuth = async (req, res) => {
                 }
             });
 
-            res.status(200).json(user);
+            return res.status(200).json(user);
         } catch (err) {
             return res.status(500).json({ message: "Server error" });
         }
@@ -97,14 +99,16 @@ export const GoogleAuth = async (req, res) => {
             expiresIn: 1000 * 60 * 60 * 24 * 7
         })
 
-        // Set cookie options
+        // Set cookie options (secure required when sameSite is 'none' in production)
+        const isProd = process.env.NODE_ENV === 'production';
+        console.log('Auth: setting session cookie', { uid: userRecord.uid, isProd, cookieLength: sessionCookie?.length });
         res.cookie("session", sessionCookie, {
             httpOnly: true,
-            //secure: true,
-            sameSite: "none",
-            maxAge: 1000 * 60 * 60 * 24 * 7
+            secure: isProd,
+            sameSite: isProd ? "none" : "lax",
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+            path: '/'
         })
-        res.send('Cookie is set')
 
         // Check if user exists in database
         let user = await prisma.userAccounts.findUnique({
@@ -131,13 +135,15 @@ export const GoogleAuth = async (req, res) => {
 
 export const Logout = async (req, res) => {
     try {
+        const isProd = process.env.NODE_ENV === 'production';
         res.clearCookie('session', {
             httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
+            secure: isProd,
+            sameSite: isProd ? 'none' : 'lax',
+            path: '/'
         })
 
-        res.status(200).json({ message: 'Logged Out' })
+        return res.status(200).json({ message: 'Logged Out' })
 
     } catch (err) {
         return res.status(400).json({ message: "Failed to logout" })
