@@ -94,6 +94,9 @@ export const GoogleAuth = async (req, res) => {
         const sessionCookie = await admin.auth().createSessionCookie(token, {
             expiresIn: 1000 * 60 * 60 * 24 * 7
         })
+
+        console.log("secure?", req.secure)
+
         // Set cookie options
         res.cookie("session", sessionCookie, {
             httpOnly: true,
