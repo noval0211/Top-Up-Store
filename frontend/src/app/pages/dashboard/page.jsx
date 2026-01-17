@@ -12,6 +12,7 @@ export default async function Dashboard() {
                 <HeroSection />
             </section>
 
+            <hr className="outline-none bg-gray-500 border-none h-[1px] w-full " />
             <section className="w-full h-fit flex flex-col gap-10 ">
                 <DashboardClient />
             </section>

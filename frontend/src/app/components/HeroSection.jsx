@@ -1,39 +1,21 @@
 
 'use client'
 import Image from "next/image"
-import Squares from "./Background/Squares"
 import { GetBanner } from "../../lib/api/banner/banner.api"
-import { useEffect, useState } from "react"
-import Slider from "react-slick";
+import { useEffect, useState, useRef } from "react"
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Autoplay } from 'swiper/modules'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, scale: '2.5', position: 'absolute', right: '40px'}}
-            onClick={onClick}
-        />
-    );
-}
-
-function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, scale: '2.5', position: 'absolute', left: '40px', zIndex: '10' }}
-            onClick={onClick}
-        />
-    );
-}
+import 'swiper/css'
+import 'swiper/css/pagination'
 
 export default function HeroSection() {
 
     const [banner, setBanner] = useState([])
+    const [activeDot, setActiveDot] = useState(0)
+
+    const swiperRef = useRef(null)
 
     useEffect(() => {
         const fetchBanner = async () => {
@@ -45,90 +27,79 @@ export default function HeroSection() {
 
     if (banner.length == 0) return null
 
-    const settings = {
-        centerMode: true,
-        centerPadding: "380px",
-        autoplay: true,
-        autoplaySpeed: 2000,
-        pauseOnHover: true,
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        responsive: [
-            {
-                breakpoint: 1080,
-                settings: {
-                    centerPadding: "150px",
+    const infiniteBanner = [...banner, ...banner, ...banner]
 
-                },
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    centerPadding: "40px",
-
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    centerPadding: "10px",
-                },
-            },
-        ],
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,
-        appendDots: dots => (
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}
-            >
-                <ul style={{
-                    display: "flex",
-                    gap: "10px",
-                }}> {dots} </ul>
-            </div>
-        ),
-        customPaging: i => (
-            <div
-                style={{
-                    width: "15px",
-                    height: "15px",
-                    display: "flex",
-                    borderRadius: "100%",
-                    outline: "1px solid white",
-                }}
-            ></div>
-        )
-    };
+    const goToSlide = (idx) => {
+        const middle = banner.length
+        swiperRef.current?.slideTo(middle + idx)
+    }
 
     return (
-        <div className="relative slider-container pb-10 border-b-1">
-            <div className="">
-                <Slider {...settings}>
-                    {banner.map((data) => (
-                        <div
-                            key={data.id}
-                            className="px-2 py-4">
-                            <div className="aspect-video cursor-pointer">
-                                <Image
-                                    src={data.image ? `data:image/jpeg;base64,${data.image}` : "/noimg.png"}
-                                    width={100}
-                                    height={100}
-                                    alt="banner"
-                                    unoptimized
-                                    className="w-full h-full rounded-xl shadow-[0px_0px_5px_0px_#ffffff] select-none"
-                                />
-                            </div>
-                        </div>
+        <div className="px-2 sm:px-0">
+            <div className="relative">
+                <Swiper
+                    modules={[Pagination, Autoplay]}
+                    spaceBetween={30}
+                    centeredSlides
+                    allowTouchMove={false}
+                    initialSlide={banner.length}
+                    loop
+                    autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
+                    onSlideChange={(swiper) => {
+                        setActiveDot(swiper.realIndex % banner.length)
+                    }}
+
+                    breakpoints={{
+                        0: {
+                            slidesPerView: 1.1,
+                            spaceBetween: 40
+                        },
+                        640: {
+                            slidesPerView: 2,
+                        }
+                    }}
+                >
+                    {infiniteBanner.map((data, index) => (
+                        <SwiperSlide
+                            key={`${data.id}-${index}`}>
+                            {({ isActive }) => (
+                                <div className={`${isActive ? 'cursor-pointer' : 'scale-y-[80%] brightness-[10%]'} scale-y-90 aspect-video `}>
+                                    <Image
+                                        src={data.image ? `data:image/jpeg;base64,${data.image}` : "/noimg.png"}
+                                        width={100}
+                                        height={100}
+                                        alt="banner"
+                                        unoptimized
+                                        className="w-full h-full rounded-xl shadow-[0px_0px_5px_0px_#ffffff] select-none"
+                                    />
+                                </div>
+                            )}
+                        </SwiperSlide>
                     ))}
-                </Slider>
+                </Swiper>
+
+                <button onClick={() => swiperRef.current?.slidePrev()}
+                    className="absolute z-10 left-2 sm:left-1/5 top-1/2 -translate-y-1/2 bg-orange-400 p-1 md:p-2 rounded-md hover:opacity-70 cursor-pointer">
+                    <ChevronLeft color="white" />
+                </button>
+
+                <button onClick={() => swiperRef.current?.slideNext()}
+                    className="absolute z-10 right-2 sm:right-1/5 top-1/2 -translate-y-1/2 bg-orange-400 p-1 md:p-2 rounded-md hover:opacity-70 cursor-pointer">
+                    <ChevronRight color="white" />
+                </button>
             </div>
 
+            <div className="flex justify-center gap-2 mb-5">
+                {banner.map((_, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => goToSlide(idx)}
+                        className={`w-5 h-3 rounded-full transition
+              ${activeDot === idx ? 'bg-orange-500 scale-110' : 'bg-gray-400'} cursor-pointer`}
+                    />
+                ))}
+            </div>
         </div>
     )
 

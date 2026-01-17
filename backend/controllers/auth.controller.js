@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import admin from "../utils/FirebaseAdmin.js";
+
 const prisma = new PrismaClient()
 
 // Get current user
@@ -10,6 +11,7 @@ export const GetMe = async (req, res) => {
             where: { uid: req.firebaseUser.uid }
         });
 
+    
         // If user not found, return 404
         if (!user) {
             return res.status(404).json({ message: "User not found" });

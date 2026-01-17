@@ -10,13 +10,13 @@ export default function DashboardClient() {
     return (
         <>
             {/* LIST */}
-            <ul className="flex justify-center gap-2 sm:gap-3 md:gap-5 px-2 py-1 rounded-sm font-semibold text-xs sm:text-sm list-none">
+            <ul className="flex justify-center gap-2 sm:gap-3 md:gap-5 py-2 font-semibold text-xs sm:text-sm list-none">
                 {menuList.map((items, index) => {
                     return (
                         <li
                             onClick={() => setFilter(index === 0 ? '' : items)}
                             key={index}
-                            className="w-20 sm:w-25 md:w-30 py-1 bg-orange-400 text-center outline-2 outline-[var(--light-color)] cursor-pointer hover:opacity-75 rounded-2xl">
+                            className="w-20 sm:w-25 md:w-30 py-1 bg-orange-400 text-center outline-2 outline-[var(--light-color)] cursor-pointer hover:opacity-75 rounded-md">
                             <a>{items}</a>
                         </li>
                     )

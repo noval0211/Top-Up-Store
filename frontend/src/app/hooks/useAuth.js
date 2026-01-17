@@ -14,8 +14,7 @@ export function useAuth() {
         const auth = getAuth(app)
 
         const unsub = onAuthStateChanged(auth, async (user) => {
-            try {
-                console.log(user)
+            try {                
                 // If no user, sign in anonymously
                 if (!user) {
                     const { token } = await signInAnonymouse()
